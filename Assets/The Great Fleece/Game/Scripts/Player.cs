@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _agent = null;
     [SerializeField] private Animator _anim = null;
-    private Vector3 _direction;
 
     private RaycastHit hit;
 
@@ -20,8 +19,7 @@ public class Player : MonoBehaviour
             if(Physics.Raycast(ray, out hit))
             {
                 _anim.SetBool("isWalking", true);
-                //_agent.SetDestination(hit.point);
-                _agent.destination = hit.point;
+                _agent.SetDestination(hit.point);
             } 
         }
 
