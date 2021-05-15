@@ -13,6 +13,15 @@ public class GuardAI : MonoBehaviour
     [SerializeField] private bool _canReverse = false;
     [SerializeField] private bool _targetReached = false;
 
+    private Vector3 _coinPos;
+    public Vector3 CoinPos
+    {
+        get { return _coinPos; }
+        set { _coinPos = value; }
+    }
+    
+    private bool _coinDropped = false;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -22,7 +31,7 @@ public class GuardAI : MonoBehaviour
 
     private void Update()
     {
-        if (_wayPoints.Count > 0 && _wayPoints[_currentTarget] != null)
+        if (_wayPoints.Count > 0 && _wayPoints[_currentTarget] != null && !_coinDropped)
         {
             _agent.SetDestination(_wayPoints[_currentTarget].position);
 
@@ -66,9 +75,16 @@ public class GuardAI : MonoBehaviour
                 }
             }
         }
-        else
+        else if (_coinDropped)
         {
-            _animator.SetBool("isWalking", true);
+            var distance = Vector3.Distance(transform.position, _coinPos);
+            _agent.SetDestination(_coinPos);
+
+            if (distance < 4f)
+            {
+                _agent.stoppingDistance = 4f;
+                _animator.SetBool("isWalking", false);
+            }
         }
     }
 
@@ -109,5 +125,10 @@ public class GuardAI : MonoBehaviour
         }
 
         _targetReached = false;
+    }
+
+    public void CoinDropped()
+    {
+        _coinDropped = true;
     }
 }

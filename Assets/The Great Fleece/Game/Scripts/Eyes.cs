@@ -11,7 +11,7 @@ public class Eyes : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Detected Darren");
+            Debug.Log("Player Detected");
             _gameOver.SetActive(true);
         }
     }
