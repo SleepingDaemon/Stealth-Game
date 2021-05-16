@@ -12,8 +12,11 @@ public class VoiceOverTrigger : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			_camAudioSource.clip = _audioClip;
-			_camAudioSource.Play();
+			if (_camAudioSource != null)
+			{
+				_camAudioSource.clip = _audioClip;
+				_camAudioSource.Play();
+			}
 		}
 	}
 }
