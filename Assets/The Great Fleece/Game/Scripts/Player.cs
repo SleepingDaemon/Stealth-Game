@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _anim = null;
     [SerializeField] private GameObject _coin = null;
     [SerializeField] private AudioClip _coinDrop = null;
-    [SerializeField] private GameObject[] _cutscenes = null;
 
     private GameObject[] _ai = null;
     private Vector3 _target;
@@ -19,12 +18,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _ai = GameObject.FindGameObjectsWithTag("Guard1");
-        
-        //disable cutscenes
-        foreach (var cutscene in _cutscenes)
-        {
-            cutscene.SetActive(false);
-        }
     }
 
     private void Update()
