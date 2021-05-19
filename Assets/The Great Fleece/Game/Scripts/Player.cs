@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     private Vector3 _target;
 
     private bool _hasTossedCoin = false;
-    private bool _delayed = false;
 
     private void Start()
     {
